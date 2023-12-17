@@ -37,7 +37,7 @@ class Ingredients:
         return nutrient_data[0]
 
 
-Ingredient_object = Ingredients()
+ingredient_object = Ingredients()
 database_name = "C:\\Users\\salma\\Ingredients.db"
-print(Ingredient_object.display_nutrients("garlic", database_name))
+print(ingredient_object.display_nutrients("garlic", database_name))
 print("done")
