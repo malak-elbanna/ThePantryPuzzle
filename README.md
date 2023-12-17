@@ -5,7 +5,7 @@
     searching, customers can provide reviews and ratings for each recipe. Moreover, customers can share the results of each recipe with the
     community.
 # Competitve Analysis
-![Alt text](<Competitive Analysis.png>)
+![Alt text](<ThePantryPuzzle\System Designs\Competitive Analysis.png](https://github.com/malak-elbanna/ThePantryPuzzle/blob/main/System%20Designs/Competitive%20Analysis.png>)
 
 # Technical Approach
     Project Setup (MPA):
@@ -20,13 +20,13 @@
     by verifying reviews before posting them through a captcha verification system.
 
 # Feasibility Matrix
-![Alt text](<Feasibility Matrix.png>)
+![Alt text](<ThePantryPuzzle\System Designs\Feasibility Matrix.png>)
 
 # Context Diagram
-![Context Diagram](<Context Diagram.png>)
+![Context Diagram](<ThePantryPuzzle\System Designs\Context Diagram.png>)
 
 # Class Diagram
-![Class Diagram](<Class Diagram.png>)
+![Class Diagram](<ThePantryPuzzle\System Designs\Class Diagram.png>)
 
 # Use Case Diagrams
-![Use Case](<Use Case.png>)
+![Use Case](<ThePantryPuzzle\System Designs\Use Case.png>)
