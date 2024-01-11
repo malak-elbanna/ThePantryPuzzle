@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc libffi-dev
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+ENV RECAPTCHA_PRIVATE_KEY = 6Lfer0kpAAAAAEAtPP1igzvVEtUySFK8UpOCN57X
+
 EXPOSE 3000
 
 CMD ["python", "main.py"]
