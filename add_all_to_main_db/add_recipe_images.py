@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect("ThePantryPuzzle\\instance\\MainDB.db")
+connection = sqlite3.connect("instance/MainDB.db")
 cursor = connection.cursor()
 
 table_query = "alter table Recipe_Images drop dietry_preference"
@@ -22,7 +22,7 @@ def convert_to_binary(filename):
 
 def insert_blob(recipe_name, image):
     try:
-        connection = sqlite3.connect("D:\\SWE - project\\ThePantryPuzzle\\instance\\MainDB.db")
+        connection = sqlite3.connect("instance/MainDB.db")
         cursor = connection.cursor()
         query = "insert into Recipe_Images values (?, ?)"
         recipe_img = convert_to_binary(image)

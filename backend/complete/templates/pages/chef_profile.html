@@ -1,18 +1,35 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Chef Profile{% endblock %}
+{% block title %}Recipes{% endblock %}
 {% block content %}
-
-<div class="user-heading round">
-    <h1>{{ chef_info[3] }} {{ chef_info[4] }}</h1>
-    <p>{{ chef_info[1] }}</p>
+<style>
+    .checked {
+  color: green;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br><br>
+<div class="chef-info-box">
+    <h1>
+        {{chef_info[3]}} {{chef_info[4]}}
+    </h1>
+    <br>
+    {%for k in range(stars)%}
+    <span class="fa fa-star checked"></span>
+    {%endfor%}
+    {%for k in range(5-stars)%}
+    <span class="fa fa-star"></span>
+    {%endfor%}
 </div>
-<div>
-    <h2>Chef's Recipes</h2>
-    <ul class="list-group">
-        {% for recipe in list_recipes %}
-            <li class="list-group-item" style="font-size: 24px;">{{recipe}}</li>
-        {% endfor %}
-    </ul>
-</div>
-
+{% for item in recipelist %}
+  <br>
+  <div class="Recipe-Box" style="padding-left: 10%; padding-right: 10%;">
+    <form method="POST" action="{{ url_for('views.add_favorite', rname=item) }}">
+      <p style="font-size: 2.5rem; text-align: center; justify-content: center; font-family: 'Times New Roman', Times, serif"> {{item}} </p>
+      <br>
+      <a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; color: white;" id="{{item}}" name="{{item}}" href="{{ url_for('views.recipeinfo', rname=item, userid=current_user.id) }}">View Recipe</a>
+      <button class="GreenButton" type="submit" style="text-align: center; align-items: center; font-size: 2.5rem;">Add to Favorites</button>
+    </form>
+  </div>
+  <br><br>
+{% endfor %}
 {% endblock %}

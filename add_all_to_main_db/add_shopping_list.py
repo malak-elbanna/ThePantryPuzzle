@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect("D:\\SWE - project\\ThePantryPuzzle\\instance\\MainDB.db")
+connection = sqlite3.connect("instance/MainDB.db")
 cursor = connection.cursor()
 
 table = '''CREATE TABLE ShopList (

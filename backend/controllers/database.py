@@ -281,31 +281,37 @@ class chef_database(database_base_model):
         else:
             return None
     def get_chef_rating(self, chefid):
-        result = self.cursor().execute("SELECT Rating FROM Chef WHERE id = ?", (chefid,))
-        rating = result.fetchone()
-        result = self.cursor().execute("SELECT rNum FROM Chef WHERE id = ?", (chefid,))
-        number = result.fetchone()
-        return floor(rating/number)
+        result = self.cursor().execute("SELECT Rating, rNum FROM User WHERE id = ?", (chefid,))
+        data = result.fetchone()
+
+        if data is not None:
+            Rating, number = data
+            if number != 0:
+                return floor(Rating / number)
+            else:
+                return 0
+        else:
+            return None
 
     def add_Rating(self, chefid, rating_to_add):
-        result = self.cursor().execute("SELECT Rating, rNum FROM Chef WHERE id = ?", (chefid,))
+        result = self.cursor().execute("SELECT Rating, rNum FROM User WHERE id = ?", (chefid,))
         chef_data = result.fetchone()
 
         if chef_data is None:
-            result = self.cursor().execute("INSERT INTO Chef (id, Rating, rNum) VALUES (?, ?, ?)", (chefid, rating_to_add, 1))
+            result = self.cursor().execute("INSERT INTO User (id, Rating, rNum) VALUES (?, ?, ?)", (chefid, rating_to_add, 1))
         else:
-            current_rating, r_num = chef_data
+            current_rating, rNum = chef_data
 
-            if current_rating is not None and r_num is not None:
+            if current_rating is not None and rNum is not None:
                 new_rating = current_rating + rating_to_add
-                new_rum = r_num + 1
+                new_rNum = rNum + 1
             else:
                 new_rating = rating_to_add
-                new_rum = 1
+                new_rNum = 1
 
-            result = self.cursor().execute("UPDATE Chef SET Rating = ?, rNum = ? WHERE id = ?", (new_rating, new_rum, chefid))
+            result = self.cursor().execute("UPDATE User SET Rating = ?, rNum = ? WHERE id = ?", (new_rating, new_rNum, chefid))
         self.commit()
-        return result
+        return
 
         
     def get_recipes(self, chef_id):
@@ -342,14 +348,15 @@ class reviews_database(database_base_model):
     def display_review(self, recipe_name):
         query = "select User_ID, comment from Reviews where Recipe_Name = ?"
         data = self.cursor().execute(query, (recipe_name,)).fetchall()
-        tempobject=user_database("ThePantryPuzzle/instance/MainDB.db")
+        tempobject=user_database("instance/MainDB.db")
         finaltuple=()
         reviews_users=[]
         for items in data:
             temp = tempobject.get_user(items[0])
-            finaltuple = (temp[3], items[1])
-            reviews_users.append(finaltuple)
-        return reviews_users
+            if temp:
+                finaltuple = (temp[3], items[1])
+                listfadya.append(finaltuple)
+        return listfadya
         
 
     def edit_review(self, user_id, recipe_name, new_review):

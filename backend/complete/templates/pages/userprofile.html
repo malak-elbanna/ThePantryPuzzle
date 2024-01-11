@@ -1,6 +1,11 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Profile{% endblock %}
 {% block content %}
+<style>
+  .checked {
+color: green;
+}
+</style>
 <div class="container">
   <div class="row">
     <div class="profile-nav col-md-3">
@@ -10,12 +15,23 @@
           <p>{{item[1]}}</p>
         </div>
         <ul class="nav nav-pills nav-stacked">
+          <li style="text-align: center;">
+            {% if item[5]=='on' %}
+            {%for k in range(stars)%}
+            <span class="fa fa-star checked"></span>
+            {%endfor%}
+            {%for k in range(5-stars)%}
+            <span class="fa fa-star"></span>
+            {%endfor%}
+            {%endif%}
+          </li>
           <li><a href="{{ url_for('views.userprofile',userid=current_user.id) }}"> <i class="fa fa-user"></i> Profile</a></li>
             <li><a href="{{ url_for('views.useredit', userid=current_user.id) }}"> <i class="fa fa-edit"></i> Edit profile</a></li>
             <li><a href="{{ url_for('views.shoppinglist', userid=current_user.id) }}"> <i class="fa fa-edit"></i>Shopping list</a></li>
             <li><a href="{{ url_for('views.viewpantry', userid=current_user.id) }}"> <i class="fa fa-edit"></i>Pantry</a></li>
           {% if item[5]=='on' %}
             <li><a href="{{ url_for('views.viewaddrecipe', userid=current_user.id) }}"> <i class="fa fa-edit"></i>Add a recipe</a></li>
+            <br>
             {%endif%}
       </div>
     </div>

@@ -91,7 +91,7 @@
 
   <h2 style="font-size: 2.5rem; text-align: center; justify-content: center;"> {{Recipe}} </h2>
   <br>
-  <div class="bio-row">
+  <div class="bio-row"> 
     {% for item in ingredientlist %}
     <div class="column">
       <label style="text-align: center; font-size: 17px;"> {{item}} </label>
@@ -111,7 +111,7 @@
 <br><br><br><br>
 {% if chef_id %}
 <div class="dropdown">
-  <button class="dropbtn GreenButton" style="background-color: #98bfa3; width: 150px;">Rate</button>
+  <button class="dropbtn">Rate</button>
   <div class="dropdown-content">
     <a href="{{ url_for('views.rate_recipe', chef_id=chef_id, rating=1,rname=Recipe)}}">1 Star</a>
     <a href="{{ url_for('views.rate_recipe', chef_id=chef_id, rating=2,rname=Recipe)}}">2 Star</a>
@@ -139,17 +139,19 @@
 </div>
 <div style="height: 30px;"></div>
 <div class="reviews-container" style="margin-left: 10px;">
+  {%if review_list%}
   {% for review in review_list %}
       <div class="review-block">
           <label style="text-align: center; font-size: 16px;">{{review[0]}} : {{review[1]}}</label>
       </div>
   {% endfor %}
+  {%endif%}
 </div>
 <div style="height: 30px;"></div>
 <a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center; color: white;" href="{{ url_for('views.about') }}">Back</a>
 <a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center; color: white;" href="{{ url_for('views.generateshoplist', userid=current_user.id, rname=Recipe)}}">Generate Shopping List</a>
-<a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center; color:white;" href="{{ url_for('views.recipe_directions', userid=current_user.id, rname=Recipe)}}">Directions</a>
+<a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center;" href="{{ url_for('views.recipe_directions', userid=current_user.id, rname=Recipe)}}">Directions</a>
 {% if chef_id %}
-        <a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center; color:white;" href="{{ url_for('views.chef_profile', chef_id=chef_id) }}">Chef Profile</a>
+        <a class="GreenButton" type="button" href="{{ url_for('views.chef_profile', chef_id=chef_id, userid = current_user.id) }}">Chef Profile</a>
 {% endif %}
 {% endblock %}

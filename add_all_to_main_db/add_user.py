@@ -1,9 +1,7 @@
 import sqlite3
 
-connection = sqlite3.connect("ThePantryPuzzle\\instance\\MainDB.db")
+connection = sqlite3.connect("instance/MainDB.db")
 cursor = connection.cursor()
-
-# cursor.execute('DROP TABLE User')
 
 table = '''CREATE TABLE User (
                 id VARCHAR(36) PRIMARY KEY,
@@ -11,9 +9,11 @@ table = '''CREATE TABLE User (
                 password VARCHAR(255),
                 first_name VARCHAR(255),
                 last_name VARCHAR(255),
-                isChef VARCHAR(255) DEFAULT 'off'
+                isChef VARCHAR(255) DEFAULT 'off',
+                Rating int,
+                rNum int default 0
             )'''
-cursor.execute(table)
 
+cursor.execute(table)
 connection.commit()
 connection.close()

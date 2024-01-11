@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 
-connection = sqlite3.connect("instance\MainDB.db")
+connection = sqlite3.connect("instance/MainDB.db")
 cursor = connection.cursor()
 table = 'create table Ingredient(Ingredient_name varchar(255))'
 drop_table = 'drop table Ingredient'

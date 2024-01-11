@@ -1,10 +1,10 @@
 # ------------------------------test the code after modifications---------------------------------------------------
 import sqlite3
 import json
-from controllers import database
+from backend.controllers import database
 
 
-my_database = database.database_base_model("D:\\SWE - project\\ThePantryPuzzle\\instance\\MainDB.db")
+my_database = database.database_base_model("instance/MainDB.db")
 my_database.establish_connection()
 cursor = my_database.cursor()
 
@@ -46,4 +46,3 @@ print(ingredient_object.display_nutrients("garlic", database_name))
 print("done")
 my_database.commit()
 my_database.close()
-
