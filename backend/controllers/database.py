@@ -353,9 +353,9 @@ class reviews_database(database_base_model):
         listfadya=[]
         for items in data:
             temp = tempobject.get_user(items[0])
-            finaltuple = (temp[3], items[1])
-            listfadya.append(finaltuple)
-        print(listfadya)
+            if temp:
+                finaltuple = (temp[3], items[1])
+                listfadya.append(finaltuple)
         return listfadya
         
 
