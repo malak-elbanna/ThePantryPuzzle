@@ -355,8 +355,8 @@ class reviews_database(database_base_model):
             temp = tempobject.get_user(items[0])
             if temp:
                 finaltuple = (temp[3], items[1])
-                listfadya.append(finaltuple)
-        return listfadya
+                reviews_users.append(finaltuple)
+        return reviews_users
         
 
     def edit_review(self, user_id, recipe_name, new_review):
