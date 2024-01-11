@@ -7,11 +7,8 @@ table = '''create table if not exists Chef (
                 id INTEGER,
                 recipe_name varchar(255),
                 recipe_image blob,
-                foreign key (id) references User(id),
-                Rating int,
-                rNum int default=0
+                foreign key (id) references User(id)
             )'''
-
 cursor.execute(table)
 connection.commit()
 connection.close()

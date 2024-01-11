@@ -150,6 +150,6 @@
 <a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center; color: white;" href="{{ url_for('views.generateshoplist', userid=current_user.id, rname=Recipe)}}">Generate Shopping List</a>
 <a class="GreenButton" type="button" style="text-align: center; align-items: center; font-size: 2.5rem; align-self: center;" href="{{ url_for('views.recipe_directions', userid=current_user.id, rname=Recipe)}}">Directions</a>
 {% if chef_id %}
-        <a class="GreenButton" type="button" href="{{ url_for('views.chef_profile', chef_id=chef_id) }}">Chef Profile</a>
+        <a class="GreenButton" type="button" href="{{ url_for('views.chef_profile', chef_id=chef_id, userid = current_user.id) }}">Chef Profile</a>
 {% endif %}
 {% endblock %}

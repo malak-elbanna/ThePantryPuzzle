@@ -145,10 +145,10 @@ def recipeinfo(rname, userid):
                            image_data_base64=image_data_base64, form=form, review_list=review_list, chef_id=chef_id)
 
 @views.route('/chef_profile/<chef_id>/<rating>/<rname>', methods=["GET", "POST"])
+@login_required
 def rate_recipe(chef_id, rating, rname):
     form = Reviews()
     reviews_db = reviews_database(database_path)
-    user_db = user_database(database_path)
     chef_db = chef_database(database_path)
     chef_db.add_Rating(chef_id,int(rating))
     database_manager = pantry_database(database_path)
@@ -165,18 +165,24 @@ def rate_recipe(chef_id, rating, rname):
     return render_template('pages/RecipeInfo.html', ingredientlist=ingredients, Recipe=rname,
                            image_data_base64=image_data_base64, form=form, review_list=review_list, chef_id=chef_id)
 
-@views.route('/chef_profile/<chef_id>', methods=["GET"])
-def chef_profile(chef_id):
-    user_db = user_database(database_path)
-    chef_db = chef_database(database_path)
-    list_recipes = chef_db.get_recipes(chef_id)
-    chef_info = user_db.get_user(chef_id)
-    if chef_info:
-        return render_template('pages/chef_profile.html', chef_info=chef_info, list_recipes=list_recipes)
-    else:
-        flash("Chef not found", "error")
+@views.route('/chef_profile/<chef_id>/<userid>', methods=["GET"])
+@login_required
+def chef_profile(chef_id, userid):
+    if chef_id == userid:
+        return userprofile(chef_id)
+    else:    
+        user_db = user_database(database_path)
+        chef_db = chef_database(database_path)
+        list_recipes = chef_db.get_recipes(chef_id)
+        chef_info = user_db.get_user(chef_id)
+        rating = chef_db.get_chef_rating(chef_id)
+        if chef_info:
+            return render_template('pages/chef_profile.html', chef_info=chef_info, recipelist=list_recipes, stars = rating)
+        else:
+            flash("Chef not found", "error")
 
 @views.route('/recipedirections/<rname>', methods=["POST", "GET"])
+@login_required
 def recipe_directions(rname):
     recipename = rname
     databasemanager = pantry_database(database_path)
@@ -189,8 +195,10 @@ def userprofile(userid):
     databasemanager = user_database(database_path)
     favorite_recipe_instance = favorite_recipe(database_path)
     userinfo= databasemanager.get_user(userid)
+    chef_db = chef_database(database_path)
+    rating = chef_db.get_chef_rating(userid)
     favorite_recipes = favorite_recipe_instance.display_favorite_recipe(userid)
-    return render_template('pages/userprofile.html', item=userinfo, favorite_recipes=favorite_recipes)
+    return render_template('pages/userprofile.html', item=userinfo, favorite_recipes=favorite_recipes, stars=rating)
 
 @views.route('/useredit/<userid>')
 @login_required
