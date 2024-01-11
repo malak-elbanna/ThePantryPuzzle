@@ -1,6 +1,6 @@
 import sqlite3
 
-con = sqlite3.connect("D:\\SWE - project\\ThePantryPuzzle\\instance\\MainDB.db")
+con = sqlite3.connect("instance/MainDB.db")
 cursor = con.cursor()
 drop = "drop table Dietry"
 
