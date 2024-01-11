@@ -46,7 +46,7 @@ def signup():
         last_name = request.form.get('lastName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        is_chef = request.form.get('chefAccount')
+        isChef = request.form.get('chefAccount')
         print(request.form, flush=True)
         if len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
@@ -60,7 +60,7 @@ def signup():
             flash('Password must be at least 7 characters.', category='error')
         else:
             print("hello, world!")
-            new_user = User(id=str(uuid.uuid4()), email=email, password=generate_password_hash(password1, method='pbkdf2:sha256'), first_name=first_name, last_name=last_name, isChef=is_chef)
+            new_user = User(id=str(uuid.uuid4()), email=email, password=generate_password_hash(password1, method='pbkdf2:sha256'), first_name=first_name, last_name=last_name, isChef=isChef)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)

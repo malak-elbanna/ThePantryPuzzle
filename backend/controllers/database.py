@@ -344,13 +344,12 @@ class reviews_database(database_base_model):
         data = self.cursor().execute(query, (recipe_name,)).fetchall()
         tempobject=user_database("ThePantryPuzzle/instance/MainDB.db")
         finaltuple=()
-        listfadya=[]
+        reviews_users=[]
         for items in data:
             temp = tempobject.get_user(items[0])
             finaltuple = (temp[3], items[1])
-            listfadya.append(finaltuple)
-        print(listfadya)
-        return listfadya
+            reviews_users.append(finaltuple)
+        return reviews_users
         
 
     def edit_review(self, user_id, recipe_name, new_review):
