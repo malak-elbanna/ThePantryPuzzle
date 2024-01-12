@@ -24,3 +24,4 @@ virtualenv
 Werkzeug
 WTForms
 uuid
+selenium
